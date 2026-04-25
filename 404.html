@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>页面不存在 — 林昕AI</title>
+  <meta name="description" content="你走丢了，但森林里总有路。回到首页继续探索。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #040806;
+      --green: #22c55e;
+      --green-bright: #4ade80;
+      --text-primary: #f0fdf4;
+      --text-tertiary: #7ca892;
+      --border: rgba(255,255,255,0.06);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+      background: var(--bg); color: var(--text-primary);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 40px 20px;
+    }
+    .container { max-width: 480px; }
+    .tree-icon {
+      font-size: 80px; margin-bottom: 24px;
+      animation: sway 3s ease-in-out infinite;
+    }
+    @keyframes sway {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(3deg); }
+    }
+    h1 {
+      font-size: 72px; font-weight: 700; letter-spacing: -3px;
+      background: linear-gradient(135deg, var(--green), var(--green-bright));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 12px;
+    }
+    h2 { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+    p { font-size: 15px; color: var(--text-tertiary); line-height: 1.7; margin-bottom: 32px; }
+    .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 8px;
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      transition: all 0.15s; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--green); color: #fff; }
+    .btn-primary:hover { background: #15803d; transform: translateY(-1px); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.03); color: var(--text-tertiary);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.06); color: var(--text-primary); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="tree-icon" aria-hidden="true">🌿</div>
+    <h1>404</h1>
+    <h2>这片森林里没有这条路</h2>
+    <p>页面可能已被移除，或者链接有误。回到首页，我们继续帮你找答案。</p>
+    <div class="actions">
+      <a href="index.html" class="btn btn-primary">回到首页</a>
+      <a href="free-tools.html" class="btn btn-ghost">看看免费资源</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1106,7 +1106,11 @@
       <span>微信：</span>
       <strong>YangHyswts</strong>
       <div class="cta-qr-popup" onclick="event.stopPropagation()" role="tooltip">
-        <img src="weixin.png" alt="微信二维码 — 扫码添加YangHyswts" loading="lazy" width="140" height="140">
+        <img src="weixin.png" alt="微信二维码 — 扫码添加YangHyswts" loading="lazy" width="140" height="140" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <div style="display:none;padding:20px;background:var(--bg-panel);border-radius:8px;border:1px solid var(--border);margin-bottom:14px;">
+          <div style="font-size:28px;margin-bottom:8px;">💬</div>
+          <div style="font-size:13px;color:var(--text-tertiary);">打开微信搜索</div>
+        </div>
         <div class="qr-label">扫码添加微信</div>
         <div class="qr-id" onclick="event.stopPropagation();copyToClipboard('YangHyswts','微信号')">YangHyswts</div>
         <div class="qr-copy-hint">点击ID复制</div>
