@@ -334,8 +334,8 @@ function copyPrompt(btn) {
   const text = code.textContent.replace('复制', '').trim();
   navigator.clipboard.writeText(text).then(() => {
     btn.textContent = '已复制 ✓';
-    btn.style.color = '#10b981';
-    setTimeout(() => { btn.textContent = '复制'; btn.style.color = ''; }, 2000);
+    btn.style.background = '#22c55e'; btn.style.color = '#fff'; btn.style.borderColor = '#22c55e';
+    setTimeout(() => { btn.textContent = '复制'; btn.style.background = ''; btn.style.color = ''; btn.style.borderColor = ''; }, 2000);
   });
 }
 </script>
