@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>免费下载 — 数据自动化报表模板 | 林昕AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #040806; --panel: #070d0a; --surface: #0d1812;
+      --text: #f0fdf4; --text2: #a7f3d0; --text3: #7ca892; --muted: #4a6b5a;
+      --green: #22c55e; --green-d: #15803d; --green-l: #4ade80;
+      --border: rgba(255,255,255,0.06);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+      color: var(--text); background: var(--bg); line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    nav {
+      position: fixed; top: 0; width: 100%; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; background: rgba(4,8,6,0.85);
+      backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.03);
+      z-index: 100;
+    }
+    .nav-logo { font-size: 18px; font-weight: 600; text-decoration: none; color: var(--text); }
+    .nav-logo span { color: var(--green); }
+    .nav-links a {
+      font-size: 14px; font-weight: 500; color: var(--text3);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .hero {
+      min-height: 60vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 120px 24px 60px;
+      position: relative;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -200px; left: 50%;
+      transform: translateX(-50%); width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(34,197,94,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 9999px;
+      border: 1px solid rgba(34,197,94,0.25); background: rgba(34,197,94,0.06);
+      font-size: 13px; font-weight: 500; color: var(--green-l); margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: 44px; font-weight: 700; letter-spacing: -1px;
+      margin-bottom: 16px; max-width: 600px;
+    }
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--green), var(--green-l));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p { font-size: 17px; color: var(--text3); max-width: 480px; margin-bottom: 36px; }
+
+    .content { max-width: 800px; margin: 0 auto; padding: 0 24px 100px; }
+
+    /* Feature cards */
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 48px 0; }
+    .feature {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 28px; text-align: center;
+      transition: border-color 0.3s;
+    }
+    .feature:hover { border-color: rgba(34,197,94,0.2); }
+    .feature .icon { font-size: 32px; margin-bottom: 12px; }
+    .feature h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .feature p { font-size: 13px; color: var(--text3); line-height: 1.6; }
+
+    /* Preview table */
+    .preview {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden; margin: 32px 0;
+    }
+    .preview-header {
+      padding: 16px 24px; border-bottom: 1px solid var(--border);
+      font-size: 14px; font-weight: 600; color: var(--text2);
+    }
+    .preview-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .preview-table th {
+      padding: 10px 16px; text-align: left; font-weight: 600;
+      color: var(--text2); border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+    }
+    .preview-table td {
+      padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.03);
+      color: var(--text3);
+    }
+    .preview-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* Download buttons */
+    .downloads {
+      display: flex; flex-direction: column; gap: 12px;
+      margin: 40px 0;
+    }
+    .dl-btn {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 12px;
+      text-decoration: none; color: var(--text); transition: all 0.2s;
+    }
+    .dl-btn:hover {
+      border-color: var(--green); background: rgba(34,197,94,0.04);
+      transform: translateY(-1px);
+    }
+    .dl-info h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .dl-info p { font-size: 13px; color: var(--text3); }
+    .dl-action {
+      padding: 10px 20px; background: var(--green); color: #fff;
+      border-radius: 8px; font-size: 14px; font-weight: 600;
+      white-space: nowrap;
+    }
+    .dl-btn:hover .dl-action { background: var(--green-d); }
+
+    /* How to use */
+    .steps { margin: 48px 0; }
+    .steps h2 {
+      font-size: 24px; font-weight: 600; margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+    .step {
+      display: flex; gap: 16px; margin-bottom: 20px;
+      padding: 20px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 12px;
+    }
+    .step-num {
+      width: 32px; height: 32px; min-width: 32px; border-radius: 8px;
+      background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: var(--green-l);
+    }
+    .step h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .step p { font-size: 13px; color: var(--text3); line-height: 1.6; }
+    .step code {
+      background: rgba(34,197,94,0.1); padding: 2px 8px; border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--green-l);
+    }
+
+    /* CTA */
+    .cta {
+      text-align: center; padding: 60px 24px;
+      background: var(--panel); border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border); margin: 48px 0;
+      border-radius: 16px;
+    }
+    .cta h2 { font-size: 28px; font-weight: 600; margin-bottom: 12px; }
+    .cta p { font-size: 15px; color: var(--text3); margin-bottom: 28px; }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; background: var(--green); color: #fff;
+      border-radius: 8px; font-size: 15px; font-weight: 600;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .cta-btn:hover { background: var(--green-d); }
+
+    footer {
+      padding: 40px 24px; text-align: center;
+      font-size: 13px; color: var(--muted);
+    }
+    footer a { color: var(--text2); text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 32px; }
+      .features { grid-template-columns: 1fr; }
+      .dl-btn { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">林昕<span>AI</span></a>
+  <div class="nav-links">
+    <a href="index.html">返回首页</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="badge">🎁 完全免费</div>
+  <h1>数据自动化<span class="accent">报表模板</span></h1>
+  <p>输入数据，自动生成专业报表。包含KPI看板、趋势图表、区域分析，告别手动Excel。</p>
+</section>
+
+<div class="content">
+
+  <!-- Features -->
+  <div class="features">
+    <div class="feature">
+      <div class="icon">📊</div>
+      <h3>5个分析维度</h3>
+      <p>数据总览 · 销售明细 · 区域分析 · 产品分析 · 渠道分析</p>
+    </div>
+    <div class="feature">
+      <div class="icon">📈</div>
+      <h3>自动图表</h3>
+      <p>折线图 · 柱状图 · 饼图，数据变化一目了然</p>
+    </div>
+    <div class="feature">
+      <div class="icon">⚡</div>
+      <h3>一键生成</h3>
+      <p>Python脚本 + CSV数据，替换即可复用</p>
+    </div>
+  </div>
+
+  <!-- Preview -->
+  <div class="preview">
+    <div class="preview-header">📋 数据预览（样例数据 · 200条记录）</div>
+    <table class="preview-table">
+      <thead>
+        <tr><th>日期</th><th>产品</th><th>区域</th><th>渠道</th><th>销售额</th><th>利润</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2026-01-01</td><td>智能手表</td><td>华东</td><td>淘宝</td><td>¥1,596</td><td>¥958</td></tr>
+        <tr><td>2026-01-02</td><td>无线蓝牙耳机</td><td>华南</td><td>抖音</td><td>¥1,161</td><td>¥522</td></tr>
+        <tr><td>2026-01-03</td><td>便携充电宝</td><td>华北</td><td>拼多多</td><td>¥1,975</td><td>¥988</td></tr>
+        <tr><td>2026-01-05</td><td>USB-C扩展坞</td><td>西南</td><td>京东</td><td>¥745</td><td>¥447</td></tr>
+        <tr><td>2026-01-08</td><td>机械键盘</td><td>华中</td><td>私域</td><td>¥747</td><td>¥433</td></tr>
+        <tr><td colspan="6" style="text-align:center;color:var(--muted);padding:16px;">... 共200条记录，覆盖6种产品 × 5个区域 × 5个渠道</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Downloads -->
+  <h2 style="font-size:24px;font-weight:600;margin-bottom:20px;">⬇️ 下载文件</h2>
+  <div class="downloads">
+    <a href="downloads/report-template/销售数据自动化报表.xlsx" class="dl-btn" download>
+      <div class="dl-info">
+        <h3>📊 销售数据自动化报表.xlsx</h3>
+        <p>预生成的完整报表 · 5个工作表 · 含图表和公式</p>
+      </div>
+      <span class="dl-btn">下载 Excel →</span>
+    </a>
+    <a href="downloads/report-template/generate_report.py" class="dl-btn" download>
+      <div class="dl-info">
+        <h3>🐍 generate_report.py</h3>
+        <p>Python脚本 · 替换CSV数据即可生成专属报表</p>
+      </div>
+      <span class="dl-btn">下载脚本 →</span>
+    </a>
+    <a href="downloads/report-template/sample_data.csv" class="dl-btn" download>
+      <div class="dl-info">
+        <h3>📄 sample_data.csv</h3>
+        <p>样例数据 · 200条电商销售记录 · 了解数据格式</p>
+      </div>
+      <span class="dl-btn">下载样例 →</span>
+    </a>
+  </div>
+
+  <!-- How to use -->
+  <div class="steps">
+    <h2>🚀 使用方法</h2>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h3>安装Python（如果没有）</h3>
+        <p>下载 <a href="https://python.org" style="color:var(--green-l)">python.org</a> 安装Python 3.8+，安装时勾选"Add to PATH"</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h3>安装依赖</h3>
+        <p>打开终端，运行 <code>pip install pandas openpyxl</code></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h3>用样例数据测试</h3>
+        <p>运行 <code>python generate_report.py</code>，生成默认报表</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <h3>用你自己的数据</h3>
+        <p>准备CSV文件，运行 <code>python generate_report.py 你的数据.csv</code>，自动生成专属报表</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <h2>需要定制报表？</h2>
+    <p>我们可以帮你做自动化的数据看板、定时报表、飞书/钉钉推送</p>
+    <a href="index.html#contact" class="cta-btn">免费咨询 →</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 林昕AI — 企业AI自动化服务 · <a href="index.html">返回首页</a></p>
+</footer>
+
+</body>
+</html>
