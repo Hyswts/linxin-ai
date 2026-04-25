@@ -754,6 +754,12 @@
       .cta { padding: 80px 20px; }
       .cta h2 { font-size: 28px; }
       .cta-contacts { flex-direction: column; align-items: center; }
+      .cta-card { flex-wrap: wrap; justify-content: center; }
+      .cta-card span { white-space: nowrap; }
+      .office-pack > div { flex-direction: column; align-items: stretch; }
+      .office-pack .icon { text-align: center; margin-bottom: 0; }
+      .office-pack h4 { white-space: normal !important; text-align: center; }
+      .office-pack a { text-align: center; justify-content: center; margin-top: 12px; }
     }
     @media (max-width: 480px) {
       .hero h1 { font-size: 26px; }
@@ -1050,13 +1056,15 @@
   </div>
   <!-- 付费数字产品 -->
   <div style="max-width:900px;margin:0 auto;">
-    <div class="resource-card reveal" style="display:flex;align-items:center;gap:24px;text-align:left;padding:28px 32px;background:rgba(34,197,94,0.04);border-color:rgba(34,197,94,0.15);cursor:default;">
-      <div class="icon" style="font-size:36px;margin-bottom:0;flex-shrink:0;">📦</div>
-      <div style="flex:1;">
-        <h4 style="font-size:16px;margin-bottom:4px;">通用办公包 <span style="color:var(--green);font-weight:700;margin-left:8px;">¥19.9</span></h4>
-        <p style="font-size:13px;color:var(--text-tertiary);line-height:1.6;">3个Excel模板 + 2个Python自动化脚本 + 10个提示词，覆盖日报周报、数据清洗、会议纪要等高频场景。一杯奶茶的价格，每周省2小时。</p>
+    <div class="resource-card office-pack reveal" style="text-align:left;padding:28px 32px;background:rgba(34,197,94,0.04);border-color:rgba(34,197,94,0.15);cursor:default;">
+      <div style="display:flex;align-items:center;gap:20px;">
+        <div class="icon" style="font-size:36px;margin-bottom:0;flex-shrink:0;">📦</div>
+        <div style="flex:1;min-width:0;">
+          <h4 style="font-size:16px;margin-bottom:4px;white-space:nowrap;">通用办公包 <span style="color:var(--green);font-weight:700;margin-left:8px;">¥19.9</span></h4>
+          <p style="font-size:13px;color:var(--text-tertiary);line-height:1.6;">3个Excel模板 + 2个Python自动化脚本 + 10个提示词，覆盖日报周报、数据清洗、会议纪要等高频场景。一杯奶茶的价格，每周省2小时。</p>
+        </div>
+        <a href="#contact" class="btn-primary" style="flex-shrink:0;font-size:13px;padding:10px 20px;" data-track="product_office_pack">咨询购买 →</a>
       </div>
-      <a href="#contact" class="btn-primary" style="flex-shrink:0;font-size:13px;padding:10px 20px;" data-track="product_office_pack">咨询购买 →</a>
     </div>
   </div>
 </section>
