@@ -8,6 +8,14 @@
   <meta property="og:title" content="林昕AI — 企业AI自动化服务">
   <meta property="og:description" content="一个人，一支AI军团。用AI自动化解决企业的数据与效率问题。">
   <meta property="og:type" content="website">
+  <!-- Google Analytics 4 — 替换 G-XXXXXXXXXX 为你的 Measurement ID -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -558,6 +566,10 @@
       background: var(--bg-hover);
     }
     .cta-card:active { transform: scale(0.97); }
+    .cta-card:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 2px;
+    }
     .cta-card strong { color: var(--text-primary); font-weight: 600; }
 
     /* QR Popup (hover desktop / tap mobile) */
@@ -1096,12 +1108,12 @@
   <h2 class="reveal">聊聊你的需求</h2>
   <p class="reveal reveal-delay-1">免费咨询，按需报价，没有套路</p>
   <div class="cta-contacts">
-    <div class="cta-card reveal reveal-delay-2" onclick="copyToClipboard('38199025068','抖音号')" data-track="contact_douyin">
+    <div class="cta-card reveal reveal-delay-2" role="button" tabindex="0" onclick="copyToClipboard('38199025068','抖音号')" onkeydown="if(event.key==='Enter'||event.key===' ')copyToClipboard('38199025068','抖音号')" data-track="contact_douyin">
       <span>📱</span>
       <span>抖音私信：</span>
       <strong>@林昕Ai</strong>
     </div>
-    <div class="cta-card reveal reveal-delay-3" onclick="handleCardTap(this)" data-track="contact_wechat">
+    <div class="cta-card reveal reveal-delay-3" role="button" tabindex="0" onclick="handleCardTap(this)" onkeydown="if(event.key==='Enter'||event.key===' ')handleCardTap(this)" data-track="contact_wechat">
       <span>💬</span>
       <span>微信：</span>
       <strong>YangHyswts</strong>
@@ -1112,11 +1124,11 @@
           <div style="font-size:13px;color:var(--text-tertiary);">打开微信搜索</div>
         </div>
         <div class="qr-label">扫码添加微信</div>
-        <div class="qr-id" onclick="event.stopPropagation();copyToClipboard('YangHyswts','微信号')">YangHyswts</div>
+        <div class="qr-id" role="button" tabindex="0" onclick="event.stopPropagation();copyToClipboard('YangHyswts','微信号')" onkeydown="if(event.key==='Enter'||event.key===' '){event.stopPropagation();copyToClipboard('YangHyswts','微信号')}">YangHyswts</div>
         <div class="qr-copy-hint">点击ID复制</div>
       </div>
     </div>
-    <div class="cta-card reveal reveal-delay-4" onclick="copyToClipboard('hyswts497987@gmail.com','邮箱')" data-track="contact_email">
+    <div class="cta-card reveal reveal-delay-4" role="button" tabindex="0" onclick="copyToClipboard('hyswts497987@gmail.com','邮箱')" onkeydown="if(event.key==='Enter'||event.key===' ')copyToClipboard('hyswts497987@gmail.com','邮箱')" data-track="contact_email">
       <span>📧</span>
       <span>邮箱：</span>
       <strong>hyswts497987@gmail.com</strong>
