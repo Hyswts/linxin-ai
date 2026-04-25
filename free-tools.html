@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI效率工具包 — 10个即用提示词模板 | 林昕Ai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #08090a;
+      --bg-panel: #0f1011;
+      --bg-surface: #191a1b;
+      --text-primary: #f7f8f8;
+      --text-secondary: #d0d6e0;
+      --text-tertiary: #8a8f98;
+      --text-muted: #62666d;
+      --accent: #5e6ad2;
+      --accent-hover: #7170ff;
+      --accent-light: #828fff;
+      --green: #10b981;
+      --border: rgba(255,255,255,0.08);
+      --border-subtle: rgba(255,255,255,0.05);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+      color: var(--text-primary);
+      background: var(--bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    nav {
+      position: fixed; top: 0; width: 100%; padding: 0 32px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(8,9,10,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle); z-index: 100;
+    }
+    .nav-logo { font-size: 18px; font-weight: 600; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-secondary); text-decoration: none; }
+    .nav-links a:hover { color: var(--text-primary); }
+    .hero {
+      min-height: 60vh; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; text-align: center; padding: 120px 24px 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px;
+      border-radius: 9999px; border: 1px solid rgba(16,185,129,0.3);
+      font-size: 13px; font-weight: 500; color: var(--green); margin-bottom: 24px;
+    }
+    .hero h1 { font-size: 48px; font-weight: 500; line-height: 1.1; letter-spacing: -1px; margin-bottom: 16px; }
+    .hero p { font-size: 18px; color: var(--text-tertiary); max-width: 520px; margin-bottom: 32px; }
+    .btn-primary {
+      background: var(--green); color: #fff; padding: 14px 28px; border-radius: 6px;
+      font-size: 16px; font-weight: 500; text-decoration: none; border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: #0ea572; }
+    section { padding: 60px 24px; max-width: 900px; margin: 0 auto; }
+    .section-title { font-size: 28px; font-weight: 500; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .section-desc { font-size: 15px; color: var(--text-tertiary); margin-bottom: 40px; }
+    .prompt-card {
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+      border-radius: 12px; padding: 28px; margin-bottom: 16px; transition: all 0.2s;
+    }
+    .prompt-card:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); }
+    .prompt-num {
+      display: inline-block; width: 28px; height: 28px; border-radius: 6px;
+      background: rgba(94,106,210,0.12); text-align: center; line-height: 28px;
+      font-size: 13px; font-weight: 600; color: var(--accent-light); margin-bottom: 12px;
+    }
+    .prompt-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.2px; }
+    .prompt-card .desc { font-size: 14px; color: var(--text-tertiary); margin-bottom: 16px; }
+    .prompt-code {
+      background: var(--bg-panel); border: 1px solid var(--border-subtle); border-radius: 8px;
+      padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 13px;
+      color: var(--text-secondary); line-height: 1.6; white-space: pre-wrap;
+      position: relative;
+    }
+    .copy-btn {
+      position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border); border-radius: 4px; padding: 4px 10px;
+      font-size: 12px; color: var(--text-tertiary); cursor: pointer;
+    }
+    .copy-btn:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
+    .cta-bottom {
+      text-align: center; padding: 80px 24px;
+      background: var(--bg-panel); border-top: 1px solid var(--border-subtle);
+    }
+    .cta-bottom h2 { font-size: 28px; font-weight: 500; margin-bottom: 12px; }
+    .cta-bottom p { font-size: 15px; color: var(--text-tertiary); margin-bottom: 32px; }
+    footer { padding: 32px 24px; text-align: center; font-size: 13px; color: var(--text-muted); }
+    footer a { color: var(--text-secondary); text-decoration: none; }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 32px; }
+      .prompt-code { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo" style="text-decoration:none">林昕<span>Ai</span></a>
+  <div class="nav-links">
+    <a href="/">返回首页</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="badge">🎁 完全免费 · 即用即走</div>
+  <h1>AI效率工具包</h1>
+  <p>10个经过实战验证的提示词模板，覆盖办公、数据、内容、营销四大场景。复制即用，帮你每天省2小时。</p>
+  <a href="#prompts" class="btn-primary">查看全部模板 ↓</a>
+</section>
+
+<section id="prompts">
+  <h2 class="section-title">10个即用提示词</h2>
+  <p class="section-desc">点击复制按钮，粘贴到ChatGPT/Claude/豆包即可使用</p>
+
+  <div class="prompt-card">
+    <div class="prompt-num">01</div>
+    <h3>📊 日报/周报自动生成</h3>
+    <div class="desc">输入今天做了什么，AI帮你写成专业的工作汇报</div>
+    <div class="prompt-code"><button class="copy-btn" onclick="copyPrompt(this)">复制</button>你是一个专业的工作汇报助手。请根据以下工作内容，生成一份结构清晰的工作日报/周报：
+
+【今日工作】
+- [填写你的工作内容]
+
+要求：
+1. 按"已完成/进行中/待处理"分类
+2. 每条用动词开头，突出结果
+3. 语言简洁专业，不超过300字
+4. 附上明日计划</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-num">02</div>
+    <h3>📧 商务邮件一键撰写</h3>
+    <div class="desc">告诉AI你要发什么邮件，30秒出稿</div>
+    <div class="prompt-code"><button class="copy-btn" onclick="copyPrompt(this)">复制</button>你是一个商务邮件撰写专家。请帮我写一封邮件：
+
+【收件人】[客户/合作方/领导]
+【目的】[合作邀请/报价/跟进/道歉]
+【关键信息】[你想传达的核心内容]
+【语气】[正式/友好/紧迫]
+
+要求：
+1. 标题要有吸引力
+2. 正文控制在150字以内
+3. 结尾有明确的行动号召（CTA）
+4. 提供中文版</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-num">03</div>
+    <h3>📋 会议纪要秒出</h3>
+    <div class="desc">粘贴会议录音转文字，AI自动整理成纪要</div>
+    <div class="prompt-code"><button class="copy-btn" onclick="copyPrompt(this)">复制</button>你是会议纪要整理专家。请根据以下会议内容，生成结构化会议纪要：
+
+【会议内容】
+[粘贴会议录音转文字或笔记]
+
+要求：
+1. 会议基本信息（时间/参会人/主题）
+2. 讨论要点（分条列出）
+3. 决议事项（明确负责人和截止时间）
+4. 待跟进事项
+5. 控制在500字以内</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-num">04</div>
+    <h3>🔍 竞品分析报告</h3>
+    <div class="desc">输入竞品信息，AI输出专业分析报告</div>
+    <div class="prompt-code"><button class="copy-btn" onclick="copyPrompt(this)">复制</button>你是商业分析师。请对以下竞品进行深度分析：
+
+【我方产品/服务】[你的业务]
+【竞品信息】[竞品名称、定价、特点]
+
+分析维度：
+1. 产品功能对比（表格形式）
+2. 定价策略分析
+3. 目标客户差异
+4. 竞品优劣势（SWOT简版）
+5. 我方的差异化机会
+6. 具体建议（3条可执行的）</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-num">05</div>
+    <h3>📝 小红书爆款笔记</h3>
+    <div class="desc">输入主题，AI生成高互动笔记文案</div>
+    <div class="prompt-code"><button class="copy-btn" onclick="copyPrompt(this)">复制</button>你是小红书爆款内容专家。请帮我写一篇笔记：
+
+【主题】[你的主题]
+【目标人群】[谁会看]
+【核心卖点】[你想传达的价值]
+
+要求：
+1. 标题：带数字+情绪词+痛点（给出3个备选）
+2. 正文：口语化、有干货、分段清晰
+3. 正文控制在500字以内
+4. 结尾：互动引导（提问/投票/求分享）
+5. 附上5-10个相关话题标签
+6. 标注配图建议（几张、什么风格）</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-num">06</div>
+    <h3>💬 客户异议应对话术</h3>
+    <div class="desc">提前准备好客户可能的拒绝理由和回应</div>
+    <div class="prompt-code"><button class="copy-btn" onclick="copyPrompt(this)">复制</button>你是销售话术专家。请帮我准备客户异议应对方案：
+
+【产品/服务】[你卖什么]
+【目标客户】[卖给谁]
+【常见异议】[客户可能说"太贵了"/"不需要"/"再考虑"等]
+
+请为每种异议提供：
+1. 异议背后的真实顾虑
+2. 共情回应（先认同再引导）
+3. 3种不同风格的回应话术（温和型/专业型/故事型）
+4. 促成成交的追问句</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-num">07</div>
+    <h3>📊 Excel数据清洗指令</h3>
+    <div class="desc">描述你的数据问题，AI生成Python清洗代码</div>
+    <div class="prompt-code"><button class="copy-btn" onclick="copyPrompt(this)">复制</button>你是数据分析专家。请帮我用Python处理以下Excel数据问题：
+
+【数据描述】[数据有几列、什么内容]
+【需要处理】
+- [ ] 去除重复行
+- [ ] 填充缺失值
+- [ ] 格式统一
+- [ ] 其他：[具体需求]
+
+要求：
+1. 使用pandas库
+2. 代码可直接运行
+3. 每步加注释
+4. 输出处理后的Excel文件
+5. 附上数据统计摘要</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-num">08</div>
+    <h3>🎯 产品定价策略</h3>
+    <div class="desc">AI帮你分析市场并给出定价建议</div>
+    <div class="prompt-code"><button class="copy-btn" onclick="copyPrompt(this)">复制</button>你是定价策略专家。请帮我分析产品定价：
+
+【产品/服务】[你卖什么]
+【成本】[你的成本结构]
+【竞品定价】[竞争对手价格范围]
+【目标客户】[谁会买、支付能力如何]
+
+请输出：
+1. 3种定价方案（低价引流/中端主力/高端溢价）
+2. 每种方案的预期利润率
+3. 推荐方案及理由
+4. 定价心理学技巧建议
+5. 促销策略建议</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-num">09</div>
+    <h3>🎬 短视频脚本生成</h3>
+    <div class="desc">输入选题，AI输出完整的短视频脚本</div>
+    <div class="prompt-code"><button class="copy-btn" onclick="copyPrompt(this)">复制</button>你是短视频编剧。请帮我写一个短视频脚本：
+
+【选题】[视频主题]
+【平台】[抖音/小红书/B站]
+【时长】[15秒/30秒/60秒]
+【风格】[知识分享/剧情/种草/vlog]
+
+输出格式：
+1. 开头钩子（前3秒抓住注意力）
+2. 正文内容（分镜头描述）
+3. 结尾CTA（引导关注/评论/购买）
+4. 画面描述（每个镜头拍什么）
+5. 配乐建议
+6. 字幕/文字建议</div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-num">10</div>
+    <h3>📱 朋友圈营销文案</h3>
+    <div class="desc">AI帮你写有温度的朋友圈带货文案</div>
+    <div class="prompt-code"><button class="copy-btn" onclick="copyPrompt(this)">复制</button>你是私域营销专家。请帮我写5条朋友圈文案：
+
+【产品/服务】[你推广什么]
+【卖点】[核心价值]
+【目标人群】[谁会买]
+
+要求：
+1. 每条100字以内
+2. 5条不同风格：
+   - 故事型（用场景带入）
+   - 干货型（先给价值再推荐）
+   - 对比型（before/after）
+   - 客户证言型（模拟好评）
+   - 紧迫型（限时/限量）
+3. 语气自然，像朋友推荐，不像广告
+4. 每条配图建议</div>
+  </div>
+</section>
+
+<section class="cta-bottom">
+  <h2>想要更多模板？</h2>
+  <p>关注抖音 @林昕Ai，每周更新AI实战技巧</p>
+  <a href="https://www.douyin.com/user/林昕Ai" class="btn-primary" style="background:var(--accent)">关注 @林昕Ai →</a>
+</section>
+
+<footer>
+  <p>© 2026 林昕Ai — 企业AI自动化服务 | <a href="/">返回首页</a></p>
+</footer>
+
+<script>
+function copyPrompt(btn) {
+  const code = btn.parentElement;
+  const text = code.textContent.replace('复制', '').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '已复制 ✓';
+    btn.style.color = '#10b981';
+    setTimeout(() => { btn.textContent = '复制'; btn.style.color = ''; }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
