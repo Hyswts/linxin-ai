@@ -589,6 +589,110 @@
       .cta h2 { font-size: 32px; }
       .cta-contacts { flex-direction: column; align-items: center; }
     }
+
+    /* ==============================
+       CONTACT HOVER QR POPUP
+       ============================== */
+    .cta-card {
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+    }
+    .cta-qr-popup {
+      position: absolute;
+      bottom: calc(100% + 18px);
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hover);
+      border-radius: 14px;
+      padding: 24px;
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      z-index: 50;
+      min-width: 210px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(34,197,94,0.08);
+    }
+    .cta-qr-popup::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 8px solid transparent;
+      border-top-color: var(--border-hover);
+    }
+    .cta-card:hover .cta-qr-popup {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
+    .cta-qr-popup img {
+      width: 140px; height: 140px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-bottom: 14px;
+      background: #fff;
+      padding: 8px;
+      image-rendering: pixelated;
+    }
+    .cta-qr-popup .qr-label {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    .cta-qr-popup .qr-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      background: var(--bg-panel);
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      margin-bottom: 8px;
+      display: inline-block;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cta-qr-popup .qr-id:hover {
+      border-color: var(--green);
+      background: var(--green-glow);
+    }
+    .cta-qr-popup .qr-copy-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .copy-toast {
+      position: fixed;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-16px);
+      background: var(--green);
+      color: #fff;
+      padding: 10px 28px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      pointer-events: none;
+      box-shadow: 0 4px 20px rgba(34,197,94,0.3);
+    }
+    .copy-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    /* Hide QR popups on mobile — no hover */
+    @media (hover: none) {
+      .cta-qr-popup { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -946,20 +1050,38 @@
   <h2 class="reveal">聊聊你的需求</h2>
   <p class="reveal reveal-delay-1">免费咨询，按需报价，没有套路</p>
   <div class="cta-contacts">
-    <div class="cta-card reveal reveal-delay-2">
+    <div class="cta-card reveal reveal-delay-2" onclick="copyToClipboard('38199025068','抖音号')">
       <span>📱</span>
       <span>抖音私信：</span>
       <strong>@林昕Ai</strong>
+      <div class="cta-qr-popup" onclick="event.stopPropagation()">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fwww.douyin.com%2Fuser%2F%E6%9E%97%E6%98%95Ai&bgcolor=040806&color=22c55e" alt="抖音二维码">
+        <div class="qr-label">扫码关注抖音</div>
+        <div class="qr-id" onclick="event.stopPropagation();copyToClipboard('38199025068','抖音号')">38199025068</div>
+        <div class="qr-copy-hint">点击ID复制</div>
+      </div>
     </div>
-    <div class="cta-card reveal reveal-delay-3">
+    <div class="cta-card reveal reveal-delay-3" onclick="copyToClipboard('YangHyswts','微信号')">
       <span>💬</span>
       <span>微信：</span>
       <strong>YangHyswts</strong>
+      <div class="cta-qr-popup" onclick="event.stopPropagation()">
+        <img src="wechat-qr.png" alt="微信二维码">
+        <div class="qr-label">扫码添加微信</div>
+        <div class="qr-id" onclick="event.stopPropagation();copyToClipboard('YangHyswts','微信号')">YangHyswts</div>
+        <div class="qr-copy-hint">点击ID复制</div>
+      </div>
     </div>
-    <div class="cta-card reveal reveal-delay-4">
+    <div class="cta-card reveal reveal-delay-4" onclick="copyToClipboard('hyswts497987@gmail.com','邮箱')">
       <span>📧</span>
       <span>邮箱：</span>
       <strong>hyswts497987@gmail.com</strong>
+      <div class="cta-qr-popup" onclick="event.stopPropagation()">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=mailto%3Ahyswts497987%40gmail.com&bgcolor=040806&color=22c55e" alt="邮箱二维码">
+        <div class="qr-label">扫码发送邮件</div>
+        <div class="qr-id" onclick="event.stopPropagation();copyToClipboard('hyswts497987@gmail.com','邮箱')">hyswts497987@gmail.com</div>
+        <div class="qr-copy-hint">点击ID复制</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1001,6 +1123,32 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
+
+// Copy to clipboard with toast feedback
+function copyToClipboard(text, label) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => showCopyToast(label, text));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showCopyToast(label, text);
+  }
+}
+function showCopyToast(label, text) {
+  let toast = document.querySelector('.copy-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.className = 'copy-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = '✓ ' + label + '已复制: ' + text;
+  toast.classList.add('show');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => toast.classList.remove('show'), 2000);
+}
 </script>
 
 <!-- Tawk.to Live Chat -->
