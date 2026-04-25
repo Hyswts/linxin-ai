@@ -24,7 +24,7 @@
       --text-primary: #f0fdf4;
       --text-secondary: #a7f3d0;
       --text-tertiary: #7ca892;
-      --text-muted: #4a6b5a;
+      --text-muted: #5f8a72;
 
       --green: #22c55e;
       --green-bright: #4ade80;
@@ -54,6 +54,18 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
+
+    /* ==============================
+       SKIP TO CONTENT (无障碍)
+       ============================== */
+    .skip-link {
+      position: absolute; top: -100%; left: 16px;
+      background: var(--green); color: #fff;
+      padding: 12px 24px; border-radius: 0 0 8px 8px;
+      font-size: 14px; font-weight: 600; z-index: 999;
+      text-decoration: none; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
 
     /* ==============================
        NAVIGATION
@@ -146,22 +158,24 @@
       padding: 14px 28px; border-radius: 8px;
       font-size: 15px; font-weight: 600;
       text-decoration: none; border: none; cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.15s;
     }
     .btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0) scale(0.98); }
     .btn-ghost {
       display: inline-flex; align-items: center; gap: 8px;
       background: rgba(255,255,255,0.03); color: var(--text-secondary);
       padding: 14px 28px; border-radius: 8px;
       font-size: 15px; font-weight: 500;
       text-decoration: none; border: 1px solid var(--border);
-      cursor: pointer; transition: all 0.2s;
+      cursor: pointer; transition: all 0.15s;
     }
     .btn-ghost:hover {
       background: rgba(255,255,255,0.06);
       border-color: var(--border-hover);
       color: var(--text-primary);
     }
+    .btn-ghost:active { transform: scale(0.98); }
 
     /* ==============================
        FLOATING PARTICLES
@@ -301,7 +315,7 @@
     .stat-item p { font-size: 14px; color: var(--text-muted); }
 
     /* ==============================
-       GROWTH NARRATIVE — 种子到森林
+       GROWTH NARRATIVE
        ============================== */
     .narrative { background: var(--bg); }
     .narrative-steps {
@@ -351,7 +365,7 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px; padding: 36px;
-      transition: all 0.3s;
+      transition: all 0.15s;
       position: relative; overflow: hidden;
     }
     .service-card::before {
@@ -365,6 +379,7 @@
       transform: translateY(-2px);
     }
     .service-card:hover::before { opacity: 1; }
+    .service-card:active { transform: translateY(0) scale(0.99); }
     .service-icon {
       width: 48px; height: 48px; border-radius: 12px;
       background: var(--green-glow);
@@ -441,12 +456,16 @@
       background: rgba(255,255,255,0.02);
       border: 1px solid var(--border);
       border-radius: 12px; padding: 24px;
-      text-align: center; transition: all 0.3s;
+      text-align: center; transition: all 0.15s;
+      text-decoration: none; color: inherit; display: block;
+      cursor: pointer;
     }
     .resource-card:hover {
       border-color: var(--border-hover);
       background: rgba(255,255,255,0.04);
+      transform: translateY(-2px);
     }
+    .resource-card:active { transform: translateY(0) scale(0.98); }
     .resource-card .icon { font-size: 28px; margin-bottom: 12px; }
     .resource-card h4 {
       font-size: 14px; font-weight: 600; margin-bottom: 6px;
@@ -529,75 +548,19 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       font-size: 15px; color: var(--text-secondary);
-      transition: all 0.2s;
+      transition: all 0.15s;
+      position: relative;
+      cursor: pointer;
+      user-select: none;
     }
     .cta-card:hover {
       border-color: var(--border-hover);
       background: var(--bg-hover);
     }
+    .cta-card:active { transform: scale(0.97); }
     .cta-card strong { color: var(--text-primary); font-weight: 600; }
 
-    /* ==============================
-       FOOTER
-       ============================== */
-    footer {
-      padding: 40px; border-top: 1px solid var(--border-subtle);
-      text-align: center; font-size: 13px; color: var(--text-muted);
-    }
-    footer a { color: var(--text-secondary); text-decoration: none; }
-
-    /* ==============================
-       SCROLL REVEAL
-       ============================== */
-    .reveal {
-      opacity: 0; transform: translateY(32px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible {
-      opacity: 1; transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
-
-    /* ==============================
-       RESPONSIVE
-       ============================== */
-    @media (max-width: 1024px) {
-      .hero-inner { flex-direction: column; gap: 40px; text-align: center; }
-      .hero-tree { flex: 0 0 auto; max-width: 300px; }
-      .hero-actions { justify-content: center; }
-      .narrative-steps { flex-wrap: wrap; justify-content: center; }
-      .narrative-steps::before { display: none; }
-      .narrative-step { flex: 0 0 calc(50% - 12px); }
-    }
-    @media (max-width: 768px) {
-      nav { padding: 0 20px; }
-      .nav-links a:not(.nav-cta) { display: none; }
-      section { padding: 80px 20px; }
-      .hero { padding: 100px 20px 60px; }
-      .hero h1 { font-size: 36px; letter-spacing: -1px; }
-      .hero-sub { font-size: 16px; }
-      .hero-tree { max-width: 240px; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-      .stat-item h2 { font-size: 32px; }
-      .section-header h2 { font-size: 28px; }
-      .services-grid { grid-template-columns: 1fr; }
-      .resources-grid { grid-template-columns: repeat(2, 1fr); }
-      .narrative-step { flex: 0 0 100%; }
-      .cta h2 { font-size: 32px; }
-      .cta-contacts { flex-direction: column; align-items: center; }
-    }
-
-    /* ==============================
-       CONTACT HOVER QR POPUP
-       ============================== */
-    .cta-card {
-      position: relative;
-      cursor: pointer;
-      user-select: none;
-    }
+    /* QR Popup (hover desktop / tap mobile) */
     .cta-qr-popup {
       position: absolute;
       bottom: calc(100% + 18px);
@@ -625,7 +588,17 @@
       border: 8px solid transparent;
       border-top-color: var(--border-hover);
     }
-    .cta-card:hover .cta-qr-popup {
+    /* Desktop: hover */
+    @media (hover: hover) {
+      .cta-card:hover .cta-qr-popup {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: auto;
+      }
+    }
+    /* Mobile: JS toggles .qr-open class */
+    .cta-card.qr-open .cta-qr-popup {
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) translateY(0);
@@ -652,18 +625,21 @@
       font-weight: 500;
       color: var(--text-primary);
       background: var(--bg-panel);
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: 6px;
       border: 1px solid var(--border);
       margin-bottom: 8px;
       display: inline-block;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.15s;
+      min-height: 44px;
+      display: inline-flex; align-items: center;
     }
     .cta-qr-popup .qr-id:hover {
       border-color: var(--green);
       background: var(--green-glow);
     }
+    .cta-qr-popup .qr-id:active { transform: scale(0.96); }
     .cta-qr-popup .qr-copy-hint {
       font-size: 11px;
       color: var(--text-muted);
@@ -689,28 +665,109 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
-    /* Hide QR popups on mobile — no hover */
-    @media (hover: none) {
-      .cta-qr-popup { display: none; }
+
+    /* ==============================
+       FOOTER
+       ============================== */
+    footer {
+      padding: 40px; border-top: 1px solid var(--border-subtle);
+      text-align: center; font-size: 13px; color: var(--text-muted);
+    }
+    footer a { color: var(--text-secondary); text-decoration: none; }
+
+    /* ==============================
+       SCROLL REVEAL
+       ============================== */
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1; transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ==============================
+       SKELETON LOADING (P0 #7)
+       ============================== */
+    .skeleton {
+      background: linear-gradient(90deg, var(--bg-surface) 25%, var(--bg-hover) 50%, var(--bg-surface) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 8px;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* ==============================
+       RESPONSIVE
+       ============================== */
+    @media (max-width: 1024px) {
+      .hero-inner { flex-direction: column; gap: 40px; text-align: center; }
+      .hero-tree { flex: 0 0 auto; max-width: 300px; }
+      .hero-actions { justify-content: center; }
+      .narrative-steps { flex-wrap: wrap; justify-content: center; }
+      .narrative-steps::before { display: none; }
+      .narrative-step { flex: 0 0 calc(50% - 12px); }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      section { padding: 64px 20px; }
+      .hero { padding: 80px 20px 48px; min-height: auto; }
+      .hero h1 { font-size: 32px; letter-spacing: -0.8px; }
+      .hero-sub { font-size: 15px; }
+      .hero-tree { max-width: 200px; }
+      .stats { padding: 40px 20px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .stat-item h2 { font-size: 28px; }
+      .section-header { margin-bottom: 40px; }
+      .section-header h2 { font-size: 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .resources-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .narrative-step { flex: 0 0 100%; }
+      .cta { padding: 80px 20px; }
+      .cta h2 { font-size: 28px; }
+      .cta-contacts { flex-direction: column; align-items: center; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 26px; }
+      .hero-tree { max-width: 140px; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .hero-actions a { justify-content: center; }
+      .resources-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .stat-item h2 { font-size: 24px; }
+      .cta-card { width: 100%; justify-content: center; }
+      .cta-qr-popup { position: fixed; bottom: 0; left: 0; right: 0; top: auto; transform: none; border-radius: 14px 14px 0 0; padding: 24px 20px 32px; max-height: 70vh; overflow-y: auto; }
+      .cta-qr-popup::after { display: none; }
+      .cta-card.qr-open .cta-qr-popup { transform: none; }
     }
   </style>
 </head>
 <body>
 
+<!-- Skip to content (无障碍) -->
+<a href="#main-content" class="skip-link">跳到主要内容</a>
+
 <!-- ==================== NAV ==================== -->
 <nav>
   <a href="#" class="nav-logo">林昕<span>AI</span></a>
   <div class="nav-links">
-    <a href="#narrative">理念</a>
     <a href="#services">服务</a>
     <a href="#resources">免费资源</a>
-    <a href="#faq">FAQ</a>
+    <a href="#faq">常见问题</a>
     <a href="#contact" class="nav-cta">免费咨询</a>
   </div>
 </nav>
 
 <!-- ==================== HERO ==================== -->
-<section class="hero">
+<section class="hero" id="main-content">
   <div class="particles" aria-hidden="true">
     <span style="--x:12%;--d:0s;--dur:7s;--s:3px"></span>
     <span style="--x:22%;--d:1.8s;--dur:9s;--s:2px"></span>
@@ -738,58 +795,42 @@
           </radialGradient>
         </defs>
 
-        <!-- Ambient glow -->
         <circle cx="200" cy="200" r="180" fill="url(#leafGlow)" class="tree-glow"/>
-
-        <!-- Ground -->
         <ellipse cx="200" cy="400" rx="160" ry="16" fill="#0d2a18" class="ground"/>
 
-        <!-- Trunk -->
         <path d="M200,400 C198,360 196,320 195,280 C194,240 197,200 200,170"
               stroke="url(#trunkGrad)" stroke-width="12" fill="none"
               stroke-linecap="round" class="trunk"/>
 
-        <!-- Main branches -->
         <path d="M197,310 C180,290 155,275 130,255" stroke="#7a4a1e" stroke-width="6" fill="none" stroke-linecap="round" class="branch b1"/>
         <path d="M198,280 C215,260 245,245 275,230" stroke="#7a4a1e" stroke-width="6" fill="none" stroke-linecap="round" class="branch b2"/>
         <path d="M199,250 C185,235 165,220 145,200" stroke="#7a4a1e" stroke-width="4.5" fill="none" stroke-linecap="round" class="branch b3"/>
         <path d="M200,230 C215,215 235,200 260,185" stroke="#7a4a1e" stroke-width="4.5" fill="none" stroke-linecap="round" class="branch b4"/>
         <path d="M200,200 C200,185 200,165 200,145" stroke="#7a4a1e" stroke-width="3.5" fill="none" stroke-linecap="round" class="branch b5"/>
 
-        <!-- Sub-branches -->
         <path d="M130,255 C118,240 105,230 90,225" stroke="#7a4a1e" stroke-width="2.5" fill="none" stroke-linecap="round" class="branch sb1"/>
         <path d="M275,230 C288,218 300,212 315,210" stroke="#7a4a1e" stroke-width="2.5" fill="none" stroke-linecap="round" class="branch sb2"/>
 
-        <!-- Leaf canopy — back layer -->
         <circle cx="90" cy="215" r="35" fill="#15803d" opacity="0" class="leaf l1"/>
         <circle cx="315" cy="200" r="32" fill="#166534" opacity="0" class="leaf l2"/>
-
-        <!-- Leaf canopy — middle layer -->
         <circle cx="145" cy="190" r="38" fill="#16a34a" opacity="0" class="leaf l3"/>
         <circle cx="260" cy="175" r="35" fill="#22c55e" opacity="0" class="leaf l4"/>
         <circle cx="200" cy="140" r="46" fill="#15803d" opacity="0" class="leaf l5"/>
         <circle cx="155" cy="165" r="28" fill="#16a34a" opacity="0" class="leaf l9"/>
         <circle cx="248" cy="160" r="28" fill="#22c55e" opacity="0" class="leaf l10"/>
-
-        <!-- Leaf canopy — front layer (brighter) -->
         <circle cx="170" cy="135" r="30" fill="#22c55e" opacity="0" class="leaf l6"/>
         <circle cx="232" cy="130" r="32" fill="#4ade80" opacity="0" class="leaf l7"/>
         <circle cx="200" cy="112" r="26" fill="#4ade80" opacity="0" class="leaf l8"/>
 
-        <!-- Ecosystem: Bird -->
         <g class="eco-bird" transform="translate(330, 125)">
           <path d="M0,0 C-4,-6 -2,-10 3,-7 C5,-10 9,-7 6,-3 C9,-5 13,-4 11,-1 C13,1 9,3 6,1 Z" fill="#4ade80"/>
           <path d="M-2,-1 L-5,-3" stroke="#fbbf24" stroke-width="1.2" stroke-linecap="round"/>
         </g>
-
-        <!-- Ecosystem: Butterfly -->
         <g class="eco-butterfly" transform="translate(80, 175)">
           <path d="M0,0 C-7,-7 -5,-13 0,-9 C5,-13 7,-7 0,0" fill="#c084fc" opacity="0.7"/>
           <path d="M0,0 C-5,5 -3,9 0,6 C3,9 5,5 0,0" fill="#a78bfa" opacity="0.5"/>
           <line x1="0" y1="-2" x2="0" y2="2" stroke="#e9d5ff" stroke-width="0.5"/>
         </g>
-
-        <!-- Ecosystem: Flower -->
         <g class="eco-flower" transform="translate(130, 395)">
           <line x1="0" y1="0" x2="0" y2="14" stroke="#22c55e" stroke-width="1.5"/>
           <circle cx="0" cy="-4" r="3.5" fill="#f472b6"/>
@@ -797,8 +838,6 @@
           <circle cx="-3.5" cy="-1" r="3.5" fill="#f9a8d4"/>
           <circle cx="0" cy="0" r="2.5" fill="#fbbf24"/>
         </g>
-
-        <!-- Ecosystem: Mushroom -->
         <g class="eco-mushroom" transform="translate(275, 395)">
           <rect x="-1.5" y="0" width="3" height="9" rx="1.5" fill="#d4c4a8"/>
           <ellipse cx="0" cy="0" rx="7" ry="5" fill="#ef4444" opacity="0.7"/>
@@ -817,8 +856,8 @@
       <h1>让AI像森林一样<br>从你的业务中<span class="accent">生长</span>出来</h1>
       <p class="hero-sub">AI不是工具，是种在你业务里的种子。我们播种、浇水、施肥，让它自己长成一棵树，进而衍生出一片森林——一整套自动化生态。</p>
       <div class="hero-actions">
-        <a href="#contact" class="btn-primary">🌱 免费咨询</a>
-        <a href="#services" class="btn-ghost">查看服务 →</a>
+        <a href="#contact" class="btn-primary" data-track="hero_cta">🌱 免费咨询</a>
+        <a href="#services" class="btn-ghost">了解服务 →</a>
       </div>
     </div>
   </div>
@@ -847,7 +886,7 @@
 </section>
 
 <!-- ==================== GROWTH NARRATIVE ==================== -->
-<section class="narrative" id="narrative">
+<section class="narrative" id="narrative" aria-label="服务理念">
   <div class="section-header">
     <h2 class="reveal">从一颗种子，到一片<span class="accent">森林</span></h2>
     <p class="reveal reveal-delay-1">AI不是买来就用的工具，而是需要培育的生命</p>
@@ -964,30 +1003,26 @@
     <p class="reveal reveal-delay-1">10个经过实战验证的AI提示词模板，复制即用</p>
   </div>
   <div class="resources-grid">
-    <div class="resource-card reveal">
+    <a href="free-tools.html" class="resource-card reveal" data-track="resource_office">
       <div class="icon">📊</div>
       <h4>数据办公</h4>
       <p>日报周报 · Excel清洗 · 会议纪要</p>
-    </div>
-    <div class="resource-card reveal reveal-delay-1">
+    </a>
+    <a href="free-tools.html" class="resource-card reveal reveal-delay-1" data-track="resource_marketing">
       <div class="icon">📝</div>
       <h4>内容营销</h4>
       <p>小红书笔记 · 短视频脚本 · 朋友圈文案</p>
-    </div>
-    <div class="resource-card reveal reveal-delay-2">
+    </a>
+    <a href="free-tools.html" class="resource-card reveal reveal-delay-2" data-track="resource_sales">
       <div class="icon">💼</div>
       <h4>商务销售</h4>
       <p>商务邮件 · 客户异议 · 产品定价</p>
-    </div>
-    <div class="resource-card reveal reveal-delay-3">
+    </a>
+    <a href="report-download.html" class="resource-card reveal reveal-delay-3" data-track="resource_data">
       <div class="icon">🔍</div>
       <h4>分析决策</h4>
       <p>竞品分析 · 定价策略 · 数据报表</p>
-    </div>
-  </div>
-  <div class="resources-cta reveal" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <a href="free-tools.html" class="btn-primary" style="background:var(--green-dark)">免费领取提示词模板 →</a>
-    <a href="report-download.html" class="btn-ghost">📊 下载数据报表模板 →</a>
+    </a>
   </div>
 </section>
 
@@ -998,47 +1033,47 @@
   </div>
   <div class="faq-list">
     <div class="faq-item reveal">
-      <button class="faq-question" onclick="toggleFaq(this)">
+      <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
         什么类型的企业适合AI自动化服务？
-        <span class="arrow">▼</span>
+        <span class="arrow" aria-hidden="true">▼</span>
       </button>
-      <div class="faq-answer"><div class="faq-answer-inner">
+      <div class="faq-answer" role="region"><div class="faq-answer-inner">
         任何有重复性数据处理、报告生成、信息汇总需求的企业都适合。典型客户包括：电商（销售数据汇总）、教培（学员管理）、零售（门店数据看板）、自媒体（多平台数据聚合）。简单说——只要你还在手动用Excel拼数据，我们就帮得上忙。
       </div></div>
     </div>
     <div class="faq-item reveal reveal-delay-1">
-      <button class="faq-question" onclick="toggleFaq(this)">
+      <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
         从咨询到交付需要多长时间？
-        <span class="arrow">▼</span>
+        <span class="arrow" aria-hidden="true">▼</span>
       </button>
-      <div class="faq-answer"><div class="faq-answer-simple">
+      <div class="faq-answer" role="region"><div class="faq-answer-inner">
         简单需求：24小时内交付Demo。标准项目：3-7天完成交付。复杂定制：2-4周。首次咨询免费，我会先评估方案和报价，确认后再动手。
       </div></div>
     </div>
     <div class="faq-item reveal reveal-delay-2">
-      <button class="faq-question" onclick="toggleFaq(this)">
+      <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
         我们需要自己准备什么？
-        <span class="arrow">▼</span>
+        <span class="arrow" aria-hidden="true">▼</span>
       </button>
-      <div class="faq-answer"><div class="faq-answer-inner">
+      <div class="faq-answer" role="region"><div class="faq-answer-inner">
         你只需要提供：① 想解决的问题描述 ② 相关数据源的访问权限（API密钥或数据文件）③ 对输出格式的期望。技术实现全部由我搞定，你不需要懂代码。
       </div></div>
     </div>
     <div class="faq-item reveal reveal-delay-3">
-      <button class="faq-question" onclick="toggleFaq(this)">
+      <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
         和帆软、飞书等SaaS工具有什么区别？
-        <span class="arrow">▼</span>
+        <span class="arrow" aria-hidden="true">▼</span>
       </button>
-      <div class="faq-answer"><div class="faq-answer-inner">
+      <div class="faq-answer" role="region"><div class="faq-answer-inner">
         SaaS工具是标准化产品，适合通用场景。我们的优势是<strong>定制化</strong>——针对你的具体业务逻辑量身打造。比如帆软做不了"自动抓取抖音数据+飞书推送+自动生成周报"这种跨平台链路，而这正是我们擅长的。价格也更友好。
       </div></div>
     </div>
     <div class="faq-item reveal reveal-delay-4">
-      <button class="faq-question" onclick="toggleFaq(this)">
+      <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
         交付后有售后支持吗？
-        <span class="arrow">▼</span>
+        <span class="arrow" aria-hidden="true">▼</span>
       </button>
-      <div class="faq-answer"><div class="faq-answer-inner">
+      <div class="faq-answer" role="region"><div class="faq-answer-inner">
         交付后包含：① 完整使用文档 ② 7天免费调整期 ③ 长期技术支持（答疑）。如需持续维护（数据源变更、报表调整），可选月度维护服务 ¥300-500/月。
       </div></div>
     </div>
@@ -1050,23 +1085,23 @@
   <h2 class="reveal">聊聊你的需求</h2>
   <p class="reveal reveal-delay-1">免费咨询，按需报价，没有套路</p>
   <div class="cta-contacts">
-    <div class="cta-card reveal reveal-delay-2" onclick="copyToClipboard('38199025068','抖音号')">
+    <div class="cta-card reveal reveal-delay-2" onclick="copyToClipboard('38199025068','抖音号')" data-track="contact_douyin">
       <span>📱</span>
       <span>抖音私信：</span>
       <strong>@林昕Ai</strong>
     </div>
-    <div class="cta-card reveal reveal-delay-3" onclick="copyToClipboard('YangHyswts','微信号')">
+    <div class="cta-card reveal reveal-delay-3" onclick="handleCardTap(this)" data-track="contact_wechat">
       <span>💬</span>
       <span>微信：</span>
       <strong>YangHyswts</strong>
-      <div class="cta-qr-popup" onclick="event.stopPropagation()">
-        <img src="weixin.png" alt="微信二维码">
+      <div class="cta-qr-popup" onclick="event.stopPropagation()" role="tooltip">
+        <img src="weixin.png" alt="微信二维码 — 扫码添加YangHyswts" loading="lazy" width="140" height="140">
         <div class="qr-label">扫码添加微信</div>
         <div class="qr-id" onclick="event.stopPropagation();copyToClipboard('YangHyswts','微信号')">YangHyswts</div>
         <div class="qr-copy-hint">点击ID复制</div>
       </div>
     </div>
-    <div class="cta-card reveal reveal-delay-4" onclick="copyToClipboard('hyswts497987@gmail.com','邮箱')" style="cursor:pointer">
+    <div class="cta-card reveal reveal-delay-4" onclick="copyToClipboard('hyswts497987@gmail.com','邮箱')" data-track="contact_email">
       <span>📧</span>
       <span>邮箱：</span>
       <strong>hyswts497987@gmail.com</strong>
@@ -1097,10 +1132,14 @@ reveals.forEach(el => observer.observe(el));
 function toggleFaq(btn) {
   const item = btn.parentElement;
   const wasOpen = item.classList.contains('open');
-  // Close all
-  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-  // Toggle clicked
-  if (!wasOpen) item.classList.add('open');
+  document.querySelectorAll('.faq-item').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+  });
+  if (!wasOpen) {
+    item.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+  }
 }
 
 // Smooth scroll for nav links
@@ -1112,7 +1151,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// Copy to clipboard with toast feedback
+// Copy to clipboard with toast
 function copyToClipboard(text, label) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(() => showCopyToast(label, text));
@@ -1124,12 +1163,15 @@ function copyToClipboard(text, label) {
     document.body.removeChild(ta);
     showCopyToast(label, text);
   }
+  trackEvent('copy', { label, text });
 }
 function showCopyToast(label, text) {
   let toast = document.querySelector('.copy-toast');
   if (!toast) {
     toast = document.createElement('div');
     toast.className = 'copy-toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
     document.body.appendChild(toast);
   }
   toast.textContent = '✓ ' + label + '已复制: ' + text;
@@ -1137,19 +1179,65 @@ function showCopyToast(label, text) {
   clearTimeout(toast._timer);
   toast._timer = setTimeout(() => toast.classList.remove('show'), 2000);
 }
+
+// Mobile tap toggle for QR popup
+function handleCardTap(card) {
+  const popup = card.querySelector('.cta-qr-popup');
+  if (!popup) { copyToClipboard('YangHyswts', '微信号'); return; }
+  // On touch devices, toggle the popup
+  if (window.matchMedia('(hover: none)').matches) {
+    const wasOpen = card.classList.contains('qr-open');
+    // Close all other popups
+    document.querySelectorAll('.cta-card.qr-open').forEach(c => c.classList.remove('qr-open'));
+    if (!wasOpen) card.classList.add('qr-open');
+  } else {
+    copyToClipboard('YangHyswts', '微信号');
+  }
+}
+
+// Close QR popup when tapping outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.cta-card')) {
+    document.querySelectorAll('.cta-card.qr-open').forEach(c => c.classList.remove('qr-open'));
+  }
+});
+
+// Event tracking (P1 #10)
+function trackEvent(name, params) {
+  // GA4 (replace G-XXXXXXXXXX with your Measurement ID)
+  if (typeof gtag === 'function') {
+    gtag('event', name, params);
+  }
+  // Console log for debugging
+  console.log('[track]', name, params);
+}
+
+// Track CTA clicks
+document.querySelectorAll('[data-track]').forEach(el => {
+  el.addEventListener('click', () => {
+    trackEvent('cta_click', { element: el.dataset.track });
+  });
+});
 </script>
 
-<!-- Tawk.to Live Chat -->
+<!-- Tawk.to — 延迟加载 (P0 #7) -->
 <script>
-  var Tawk_API = Tawk_API || {}, Tawk_Load = new Date();
-  (function(){
-    var s1 = document.createElement("script"),s0 = document.getElementsByTagName("script")[0];
-    s1.async = true;
-    s1.src = 'https://embed.tawk.to/69ed18c04d33bf1c3d48dbce/1io5a1bp5';
-    s1.charset = 'UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-  })();
+(function() {
+  function loadTawk() {
+    if (document.querySelector('script[src*="tawk.to"]')) return;
+    var s = document.createElement('script');
+    s.src = 'https://embed.tawk.to/69ed18c04d33bf1c3d48dbce/1io5a1bp5';
+    s.charset = 'UTF-8';
+    s.setAttribute('crossorigin', '*');
+    s.async = true;
+    document.head.appendChild(s);
+  }
+  // Load on first user interaction or after 5s
+  ['scroll', 'mousemove', 'touchstart'].forEach(evt =>
+    window.addEventListener(evt, loadTawk, { once: true, passive: true })
+  );
+  setTimeout(loadTawk, 5000);
+})();
 </script>
 
 </body>
